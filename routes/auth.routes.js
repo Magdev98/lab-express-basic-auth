@@ -80,14 +80,18 @@ router.post("/login", async (req, res, next) => {
     }
 
     req.session.currentUser = foundExistedUser;
-    res.redirect("/profile");
+    res.redirect("/main");
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/profile", isAuthenticated, (req, res, next) => {
-  res.render("profile");
+router.get("/main", isAuthenticated, (req, res, next) => {
+  res.render("main");
+});
+
+router.get("/private", isAuthenticated, (req, res, next) => {
+  res.render("private");
 });
 
 router.get("/logout", (req, res, next) => {
@@ -95,7 +99,7 @@ router.get("/logout", (req, res, next) => {
     if (error) {
       return next(error);
     }
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 
